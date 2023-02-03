@@ -1,0 +1,140 @@
+{
+	"name": "Notebook 2",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "kirtisparkpool",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"runAsWorkspaceSystemIdentity": false,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "0ac59f28-b66e-4012-8375-8e4e314148f4"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1",
+				"state": {
+					"28d56b2e-bb79-48d9-bc0c-d9b652cf7ee2": {
+						"type": "Synapse.DataFrame",
+						"sync_state": {
+							"table": {
+								"rows": [
+									{
+										"0": "252.6677922495578",
+										"1": "56.95529827946615",
+										"2": "2023-02-03T08:02:00Z"
+									},
+									{
+										"0": "252.95197740112994",
+										"1": "58.290018832391716",
+										"2": "2023-02-03T08:04:00Z"
+									},
+									{
+										"0": "253.55718136311128",
+										"1": "56.70639199075857",
+										"2": "2023-02-03T08:42:00Z"
+									},
+									{
+										"0": "252.8993846665558",
+										"1": "56.829536005321806",
+										"2": "2023-02-03T08:44:00Z"
+									}
+								],
+								"schema": [
+									{
+										"key": "0",
+										"name": "averageEngineTemperature",
+										"type": "double"
+									},
+									{
+										"key": "1",
+										"name": "averageSpeed",
+										"type": "double"
+									},
+									{
+										"key": "2",
+										"name": "snapshot",
+										"type": "string"
+									}
+								],
+								"truncated": false
+							},
+							"isSummary": false,
+							"language": "scala"
+						},
+						"persist_state": {
+							"view": {
+								"type": "details",
+								"chartOptions": {
+									"chartType": "bar",
+									"aggregationType": "sum",
+									"categoryFieldKeys": [
+										"1"
+									],
+									"seriesFieldKeys": [
+										"0"
+									],
+									"isStacked": false
+								}
+							}
+						}
+					}
+				}
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/29a32726-0e52-487b-9002-7a12764cbfb0/resourceGroups/DAY5RG/providers/Microsoft.Synapse/workspaces/kirtisynapse0202/bigDataPools/kirtisparkpool",
+				"name": "kirtisparkpool",
+				"type": "Spark",
+				"endpoint": "https://kirtisynapse0202.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/kirtisparkpool",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net",
+					"authHeader": null
+				},
+				"sparkVersion": "3.3",
+				"nodeCount": 3,
+				"cores": 4,
+				"memory": 28,
+				"extraHeader": null
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"metadata": {
+					"microsoft": {
+						"language": "python"
+					},
+					"collapsed": false
+				},
+				"source": [
+					"%%pyspark\r\n",
+					"df = spark.read.load('abfss://newcontainer@kirtiadls0202.dfs.core.windows.net/0_1ff6ff6b8b104845b0103b556f3f992a_1.json', format='json')\r\n",
+					"display(df.limit(10))"
+				],
+				"execution_count": 4
+			}
+		]
+	}
+}
